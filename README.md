@@ -1,6 +1,8 @@
 
 # What is this?
+## MineSweeper in slack
 
+![Preview](https://github.com/odasatoshi/slack-minesweeper/raw/master/sample.png)
 
 # Install
 
