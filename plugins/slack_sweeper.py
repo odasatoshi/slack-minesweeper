@@ -20,4 +20,8 @@ def listen_func(message):
         message.send("あなたは死にました")
         ms = Minesweeper(10, 0.2)
     message.send(ms.generate_message())
-    message.send("あと、" + str(ms.remnants()) + "個掃除してください")
+    if (ms.remnants() == 0):
+        message.send("おめでとう")
+        ms = Minesweeper(10, 0.2)
+    else:
+        message.send("あと、" + str(ms.remnants()) + "個掃除してください")
