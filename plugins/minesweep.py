@@ -23,6 +23,19 @@ class Minesweeper:
                      for i in range(self.size)]
                      for j in range(self.size)]
 
+    def remnants(self):
+        rem = 0
+        mine = 0
+        for i in range(self.size):
+            for j in range(self.size):
+                if (self.state[i][j] == self.UNOPENED):
+                    rem = rem + 1
+        for i in range(self.size):
+            for j in range(self.size):
+                if (self.stage[i][j] == self.MINE):
+                    mine = mine + 1
+        return rem - mine
+
     def neighborcell(self, row, col):
         if self.stage[row][col] == self.MINE :
             return self.MINE

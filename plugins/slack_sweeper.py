@@ -17,5 +17,7 @@ def listen_func(message):
     if ms.sweep(row, col) == False :
         ms.fullopen(row, col)
         message.send(ms.generate_message())
+        message.send("あなたは死にました")
         ms = Minesweeper(10, 0.2)
     message.send(ms.generate_message())
+    message.send("あと、" + str(ms.remnants()) + "個掃除してください")
