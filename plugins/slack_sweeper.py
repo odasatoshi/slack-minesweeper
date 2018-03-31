@@ -16,12 +16,39 @@ def listen_func(message):
     row, col =  ms.shaping(message.body['text'])
     if ms.sweep(row, col) == False :
         ms.fullopen(row, col)
-        message.send(ms.generate_message())
-        message.send("あなたは死にました")
-        ms = Minesweeper(10, 0.2)
+        die()
     message.send(ms.generate_message())
     if (ms.remnants() == 0):
-        message.send("おめでとう")
-        ms = Minesweeper(10, 0.2)
+        complete()
     else:
         message.send("あと、" + str(ms.remnants()) + "個掃除してください")
+
+@listen_to('^f\d{1},\d{1}$')
+def flag(message):
+    global ms
+    row, col = ms.shaping(message.body['text'][1:])
+    ms.flag(row, col)
+    message.send(ms.generate_message())
+
+@listen_to('^lr\d{1},\d{1}$')
+def left_right_click(message):
+    global ms
+    row, col = ms.shaping(message.body['text'][2:])
+    if ms.left_right_click(row, col) == False :
+        die()
+    message.send(ms.generate_message())
+    if (ms.remnants() == 0):
+        complete()
+    else:
+        message.send("あと、" + str(ms.remnants()) + "個掃除してください")
+
+def die():
+    global ms
+    message.send(ms.generate_message())
+    message.send("あなたは死にました")
+    ms = Minesweeper(10, 0.2)
+
+def complete():
+    global ms
+    message.send("おめでとう")
+    ms = Minesweeper(10, 0.2)
