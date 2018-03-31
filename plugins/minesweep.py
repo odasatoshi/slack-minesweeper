@@ -29,7 +29,7 @@ class Minesweeper:
         mine = 0
         for i in range(self.size):
             for j in range(self.size):
-                if (self.state[i][j] == self.UNOPENED):
+                if ((self.state[i][j] == self.UNOPENED) or (self.state[i][j] == self.FLAG)):
                     rem = rem + 1
         for i in range(self.size):
             for j in range(self.size):
