@@ -16,10 +16,10 @@ def listen_func(message):
     row, col =  ms.shaping(message.body['text'])
     if ms.sweep(row, col) == False :
         ms.fullopen(row, col)
-        die()
+        die(message)
     message.send(ms.generate_message())
     if (ms.remnants() == 0):
-        complete()
+        complete(message)
     else:
         message.send("あと、" + str(ms.remnants()) + "個掃除してください")
 
@@ -35,20 +35,20 @@ def left_right_click(message):
     global ms
     row, col = ms.shaping(message.body['text'][2:])
     if ms.left_right_click(row, col) == False :
-        die()
+        die(message)
     message.send(ms.generate_message())
     if (ms.remnants() == 0):
-        complete()
+        complete(message)
     else:
         message.send("あと、" + str(ms.remnants()) + "個掃除してください")
 
-def die():
+def die(message):
     global ms
     message.send(ms.generate_message())
     message.send("あなたは死にました")
     ms = Minesweeper(10, 0.2)
 
-def complete():
+def complete(message):
     global ms
     message.send("おめでとう")
     ms = Minesweeper(10, 0.2)
